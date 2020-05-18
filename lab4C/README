@@ -1,0 +1,17 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 0
+
+This is lab4c! Email me with any questions about my submission. I used quite a bit of code from TA slides
+in order to get the SSL connection and TCP connections working. There will be a lot of overlap with that.
+
+Included Files:
+
+README - This file with descriptions of all the included files.
+
+Makefile - Compiles the other files and prepares them for submission by compressing them.
+
+lab4c.c - Source code with all relevant code for using TCP connection to send temperature.
+
+lab4c_tls.c - Source code for using TLS connectino to send temperature.

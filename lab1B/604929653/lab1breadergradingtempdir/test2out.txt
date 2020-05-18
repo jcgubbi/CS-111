@@ -1,0 +1,15 @@
+total 44
+drwxr-xr-x 4 jivan beugrad 4096 Oct 17 15:56 .
+drwxr-xr-x 4 jivan beugrad 4096 Oct 17 15:56 ..
+-rw-r--r-- 1 jivan beugrad    0 Oct 17 15:56 err1.txt
+-rw-r--r-- 1 jivan beugrad    0 Oct 17 15:56 err.txt
+-rw-r--r-- 1 jivan beugrad    8 Oct 17 15:56 in.txt
+-rw-r--r-- 1 jivan beugrad 2890 Oct 17 15:56 lab1-604929653.tar.gz
+-rw-r--r-- 1 jivan beugrad 8652 Oct 16 22:07 lab1b.c
+drwxr-xr-x 2 jivan beugrad 4096 Oct 17 15:56 lab1breadergradingtempdir
+-rw-r--r-- 1 jivan beugrad 1772 Oct 16 22:57 Makefile
+-rw-r--r-- 1 jivan beugrad   29 Oct 17 15:56 output.txt
+-rw-r--r-- 1 jivan beugrad    6 Oct 17 15:56 out.txt
+-rw-r--r-- 1 jivan beugrad  322 Oct 16 22:26 README
+-rw-r--r-- 1 jivan beugrad  151 Oct 17 15:56 test1.txt
+drwxr-xr-x 2 jivan beugrad 4096 Oct 17 15:56 testFolder

@@ -1,0 +1,148 @@
+Total: 1392 samples
+    1018  73.1%  73.1%     1392 100.0% thread_funct
+     168  12.1%  85.2%      168  12.1% SortedList_length
+     155  11.1%  96.3%      155  11.1% __strcmp_sse42
+      32   2.3%  98.6%       98   7.0% SortedList_insert
+      18   1.3%  99.9%      108   7.8% SortedList_lookup
+       1   0.1% 100.0%        1   0.1% _init
+       0   0.0% 100.0%     1392 100.0% __clone
+       0   0.0% 100.0%      108   7.8% delete
+       0   0.0% 100.0%     1392 100.0% start_thread
+ROUTINE ====================== thread_funct in /u/be/ugrad/jivan/cs111/lab2B/lab2_list.c
+  1018   1392 Total samples (flat / cumulative)
+     .      .   37: 	}
+     .      .   38: 	if(SortedList_delete(ptr) != 0){
+     .      .   39: 		fprintf(stderr, "List is corrupted -- SortedList_lookup\n");
+     .      .   40: 	}
+     .      .   41: }
+---
+     .      .   42: void* thread_funct(void * arg){
+     .      .   43: 	int ref = *((int * ) arg);
+     .      .   44: 	int fin = ref+iterations;
+     .      .   45: 	for(int i = ref; i < fin; i++){
+     .      .   46: 		if(sync == 'm'){
+     .      .   47: 			pthread_mutex_lock(&mutex);
+     .      .   48: 			SortedList_insert(list, &arrayList[i]);
+     .      .   49: 			pthread_mutex_unlock(&mutex);
+     .      .   50: 		}
+     .      .   51: 		else if(sync == 's'){
+   408    408   52: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     .     98   53: 			SortedList_insert(list, &arrayList[i]);
+     .      .   54: 			__sync_lock_release(&spinlock);
+     .      .   55: 		}
+     .      .   56: 		else{
+     .      .   57: 			SortedList_insert(list, &arrayList[i]);
+     .      .   58: 		}
+     .      .   59: 	}
+     .      .   60: 	int len = 0;
+     .      .   61: 	for(int i = ref; i < fin; i++){
+     .      .   62: 		if(sync == 'm'){
+     .      .   63: 			pthread_mutex_lock(&mutex);
+     .      .   64: 			len = SortedList_length(list);
+     .      .   65: 			pthread_mutex_unlock(&mutex);
+     .      .   66: 		}
+     .      .   67: 		else if(sync == 's'){
+   385    385   68: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     1    169   69: 			len = SortedList_length(list);
+     .      .   70: 			__sync_lock_release(&spinlock);
+     .      .   71: 		}
+     .      .   72: 		else{
+     .      .   73: 			len = SortedList_length(list);
+     .      .   74: 		}
+     .      .   75: 	}
+     .      .   76: 	if(len < 0){
+     .      .   77: 		fprintf(stderr,"List is corrupted -- SortedList_length\n");
+     .      .   78: 		exit(2);
+     .      .   79: 	}
+     .      .   80: 	for(int i = ref; i < fin; i++){
+     .      .   81: 		if(sync == 'm'){
+     .      .   82: 			pthread_mutex_lock(&mutex);
+     .      .   83: 			delete(i);
+     .      .   84: 			pthread_mutex_unlock(&mutex);
+     .      .   85: 		}
+     .      .   86: 		else if(sync == 's'){
+   224    224   87: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     .    108   88: 			delete(i);
+     .      .   89: 			__sync_lock_release(&spinlock);
+     .      .   90: 		}
+     .      .   91: 		else{
+     .      .   92: 			delete(i);
+     .      .   93: 		}
+     .      .   94: 	}
+     .      .   95: 	return NULL;
+     .      .   96: }
+---
+     .      .   97: void handler(int num){
+     .      .   98: 	if(num == SIGSEGV){
+     .      .   99: 		fprintf(stderr, "Segmentation fault caught -- corrupted list.\n");
+     .      .  100: 		exit(2);
+     .      .  101: 	}
+ROUTINE ====================== thread_funct in /u/be/ugrad/jivan/cs111/lab2B/lab2_list.c
+  1018   1392 Total samples (flat / cumulative)
+     .      .   37: 	}
+     .      .   38: 	if(SortedList_delete(ptr) != 0){
+     .      .   39: 		fprintf(stderr, "List is corrupted -- SortedList_lookup\n");
+     .      .   40: 	}
+     .      .   41: }
+---
+     .      .   42: void* thread_funct(void * arg){
+     .      .   43: 	int ref = *((int * ) arg);
+     .      .   44: 	int fin = ref+iterations;
+     .      .   45: 	for(int i = ref; i < fin; i++){
+     .      .   46: 		if(sync == 'm'){
+     .      .   47: 			pthread_mutex_lock(&mutex);
+     .      .   48: 			SortedList_insert(list, &arrayList[i]);
+     .      .   49: 			pthread_mutex_unlock(&mutex);
+     .      .   50: 		}
+     .      .   51: 		else if(sync == 's'){
+   408    408   52: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     .     98   53: 			SortedList_insert(list, &arrayList[i]);
+     .      .   54: 			__sync_lock_release(&spinlock);
+     .      .   55: 		}
+     .      .   56: 		else{
+     .      .   57: 			SortedList_insert(list, &arrayList[i]);
+     .      .   58: 		}
+     .      .   59: 	}
+     .      .   60: 	int len = 0;
+     .      .   61: 	for(int i = ref; i < fin; i++){
+     .      .   62: 		if(sync == 'm'){
+     .      .   63: 			pthread_mutex_lock(&mutex);
+     .      .   64: 			len = SortedList_length(list);
+     .      .   65: 			pthread_mutex_unlock(&mutex);
+     .      .   66: 		}
+     .      .   67: 		else if(sync == 's'){
+   385    385   68: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     1    169   69: 			len = SortedList_length(list);
+     .      .   70: 			__sync_lock_release(&spinlock);
+     .      .   71: 		}
+     .      .   72: 		else{
+     .      .   73: 			len = SortedList_length(list);
+     .      .   74: 		}
+     .      .   75: 	}
+     .      .   76: 	if(len < 0){
+     .      .   77: 		fprintf(stderr,"List is corrupted -- SortedList_length\n");
+     .      .   78: 		exit(2);
+     .      .   79: 	}
+     .      .   80: 	for(int i = ref; i < fin; i++){
+     .      .   81: 		if(sync == 'm'){
+     .      .   82: 			pthread_mutex_lock(&mutex);
+     .      .   83: 			delete(i);
+     .      .   84: 			pthread_mutex_unlock(&mutex);
+     .      .   85: 		}
+     .      .   86: 		else if(sync == 's'){
+   224    224   87: 			while(__sync_lock_test_and_set(&spinlock,1)){continue;}
+     .    108   88: 			delete(i);
+     .      .   89: 			__sync_lock_release(&spinlock);
+     .      .   90: 		}
+     .      .   91: 		else{
+     .      .   92: 			delete(i);
+     .      .   93: 		}
+     .      .   94: 	}
+     .      .   95: 	return NULL;
+     .      .   96: }
+---
+     .      .   97: void handler(int num){
+     .      .   98: 	if(num == SIGSEGV){
+     .      .   99: 		fprintf(stderr, "Segmentation fault caught -- corrupted list.\n");
+     .      .  100: 		exit(2);
+     .      .  101: 	}

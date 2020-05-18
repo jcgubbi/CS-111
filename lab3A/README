@@ -1,0 +1,15 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 0
+
+This is lab 3A! Email me with questions about my submission.
+
+The submission seems to work on all test cases. I used the provided sanity script as well as hand checked the output
+against the simple test file system image. They bothed seemed to work perfectly but the testing is limited. It may
+fail more robust test scripts.
+
+README: This file with descriptions of each of the files.
+lab3.c: Source code with all relevant code for analyzing the file system image.
+extfs.h: Header file that is given that has format of the image.
+Makefile: File that makes, cleans and packages the above code.

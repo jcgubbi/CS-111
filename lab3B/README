@@ -1,0 +1,12 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 0
+
+This is lab 3B. Email me with any questions about my submission!
+
+Makefile - File that makes, tars and cleans the other files in the directory.
+
+lab3.py - Python source code that passes sanity checking script. 
+
+README - This file with descriptions about all included files.

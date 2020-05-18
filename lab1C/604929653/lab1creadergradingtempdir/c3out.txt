@@ -1,0 +1,4 @@
+user time: 0.000000 system time: 0.000092
+exit 0 sort 
+user time: 0.000000 system time: 0.000081
+user time: 10.372738 system time: 0.244859

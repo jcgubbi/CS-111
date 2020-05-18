@@ -1,0 +1,14 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 0
+
+This is lab4b! Email me with any questions about my submission.
+
+Included Files:
+
+README - This file with descriptions of all the included files.
+
+Makefile - Compiles the other files and prepares them for submission by compressing them.
+
+lab4b.c - Source code with all relevant code for reading from temperature sensor.

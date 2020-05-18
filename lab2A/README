@@ -1,0 +1,63 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 3
+
+INCLUDED FILES:
+
+lab2_add.c - Source code for part 1 implementing adding to a shared variable with threads.
+lab2_add.csv - Results from running lab2_add with all the options stored in CSV file.
+lab2_add-1.png - Graph of threads vs. iterations for failure(yield and no yield).
+lab2_add-2.png - Graph of time per operation for yield and no yield.
+lab2_add-3.png - Graph of time per operation vs. iterations for yield and no yield.
+lab2_add-4.png - Graph of successful runs with different locks.
+lab2_add-5.png - Graph of average time per operatoin vs. number of threads.
+lab2_add - the executable for lab2_add.c
+lab2_list.c - Source code for part 2 implementing various locking methods.
+SortedList.c - Source code for part 2 for the sorted linked list.
+SortedList.h - Provided header file for part 2.
+lab2_list.csv - Results from running lab2_list with all the options stored in a CSV file.
+lab2_list - Executable for lab2_list.c
+lab2_list-1.png - Graph of time per unprotected operation vs. iterations.
+lab2_list-2.png - Graph of threads and iterations for failure.
+lab2_list-3.png - Graph of iterations vs. threads without failure.
+lab2_list-4.png - Graph of cost per operation vs. threads.
+Makefile - Successfully compiles, checks, graphs and zips all the files.
+part1.gp - Provided graphing script for part1.
+part2.gp - Provided graphing script for part2.
+graph.sh - Creates csv entries for graphing.
+README - This File! With descriptions of files and answers to questions.
+
+2.1.1
+When we have a low number of iterations, by the time a thread is created, the previous thread is already 
+done with its work. This reduces our chance of race conditions to almost 0. If there is no overlap in the
+time that threads are runninng then it will exit successfully. 
+
+2.1.2
+The --yield runs so much slower because each time we yield, we need to context switch to give control 
+back to the cpu. This context switch eats up a lot of time and is expensive. We cannot get valid per
+operation timings with --yield since we are only looking at wall times! With many threads and many
+yields at once, the wall time doesn't make sense to divide by threads. 
+
+2.1.3
+The average cost per operation drops with increasing iterations because the cost of creating a thread is 
+massive. So with more and more iterations we have more small cost operations reducing the cost per operation.
+The graph of cost per operations vs. iterations shows that there appears to be some asymptotic limit. As we
+increase iterations the avg cost seems to stop decreasing so steeply and hit a somewhat steady value somewhere
+between 5-10. This is a pretty good estimate of the actual time per operation.
+
+2.1.4
+All of the options perform similarly for low numbers of threads because they won't have to wait that much
+when there are only a couple of threads running. Not as much contention! All three protected operations slow
+down as the number of threads rises because with more threads there is more contention. All the threads cannot
+run at once so they are all fighting for the lock more. 
+
+2.2.1
+It is quite clear by looking at the graphs that cost per operation for the ordered list grows a lot quicker. 
+It is because each list operations are a lot more expensive than addition or subtraction. The addition 
+example barely exceeds 100ns/op while the list example exceeds that value quite quickly. 
+
+2.2.2
+At low thread numbers spinlocks tend to outperform mutexes when it comes to cost per operation but as we increase
+threads this doesn't hold. This is because the mutex gives up the CPU to other processes while the spinlock 
+holds the CPU until it can acquire the lock. This wastes a lot more time. 

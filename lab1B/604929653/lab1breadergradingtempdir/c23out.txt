@@ -1,0 +1,4 @@
+signal 11 ./grading_helper 11 
+exit 20 bash -c exit 20 
+signal 15 ./grading_helper 15 
+signal 9 ./grading_helper 9 

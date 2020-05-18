@@ -1,0 +1,1 @@
+Cannot open b1s.txt read only

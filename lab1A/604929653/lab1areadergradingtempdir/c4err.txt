@@ -1,0 +1,1 @@
+Cannot open test4_none_exist.txt read only

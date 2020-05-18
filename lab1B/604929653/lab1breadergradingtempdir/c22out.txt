@@ -1,0 +1,3 @@
+exit 10 bash -c exit 10 
+exit 20 bash -c exit 20 
+exit 15 bash -c exit 15 

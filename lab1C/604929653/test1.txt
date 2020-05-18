@@ -1,0 +1,9 @@
+--rdwr in.txt
+--command 0 0 0 sleep 2 
+--command 0 0 0 sleep 3 
+--wait
+exit 0 sleep 2 
+exit 0 sleep 3 
+--command 0 0 0 sleep 4 
+--wait
+exit 0 sleep 4 

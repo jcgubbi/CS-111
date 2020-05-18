@@ -1,0 +1,49 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+SLIPDAYS: 2
+
+This is lab 2B! Please email me with any questions.
+
+QUESTION 2.3.1 - CPU time in the basic list implementation 
+
+Where do you believe most of the CPU time is spent in the 1 and 2-thread list tests ?
+For the 1 thread list case I would assume that the majority of the CPU time is spent doing actual list operations(add, lookup, delete, length). I would say this because there is no contention for the lock so we can somewhat ignore the cost of unlocking and locking. This is especially true when we have higher values for iterations where the data structure can get pretty long and could take a while to delete and lookup and other O(n) operations. For spin lock 1 thread and spin lock 2 threads this is definitely true as well as high iteration mutex. The spinlock won't spin much for 1 or 2 threads. For mutexes, locking and unlocking is slightly more expensive so with low iterations we don't really know which will take more time.
+
+Why do you believe these to be the most expensive parts of the code?
+I believe that these are the most expensive parts of the code because we are either going to spend a lot of time waiting for a lock to allow us to do the list operation or will get the lock quickly and spend most of our time on list operations. A long list means that these operations are fairly slow and will result in horrible runtimes. Also for a highly multithreaded environment there is going to be a lot of lock contention which will overshadow the cost of list operations.
+
+Where do you believe most of the CPU time is being spent in the high-thread spin-lock tests?
+In a high thread spin lock test, I believe tha tthe mojority of the time will be spent spinning waiting for locks to become available.
+
+Where do you believe most of the CPU time is being spent in the high-thread mutex tests?
+In a high thread mutex test, I believe that the majority of the time will be spent context switching between threads because we would be switching between threads every time that we cannot get a lock. This is true unless we have an extremely long list, in that case we would spend the most time on list operations.
+
+QUESTION 2.3.2 - Execution Profiling:
+
+Where (what lines of code) are consuming most of the CPU time when the spin-lock version of the list exerciser is run with a large number of threads?
+The lines of code containing the locks are consuming the most CPU time with the spin-lock version of the list with a high number of threads. This means that we are spinning a lot of time spinning and waiting until the lock is ready to be used. 
+
+Why does this operation become so expensive with large numbers of threads?
+This operation becomes so expensive with large numbers of threads because there is a lot of contention for the lock so each thread is spinning waiting for the single lock to become available so they can do their list operations. This spinning is quite CPU intensive since they are not relinquishing control of the CPU. 
+
+QUESTION 2.3.3 - Mutex Wait Time:
+Look at the average time per operation (vs. # threads) and the average wait-for-mutex time (vs. #threads).
+Why does the average lock-wait time rise so dramatically with the number of contending threads?
+The average lock-wait time rises so dramatically with the number of contending threads because with more threads there is more contention for the locks. Each thread has to do try to get control of a lock that is more and more likely to be in use as we increase the number of threads.
+
+Why does the completion time per operation rise (less dramatically) with the number of contending threads?
+The completion time per operation rises with the number of contending threads because we spend more time context switching between various threads. It grows less dramatically because as we increase threads we are also increasing the amount of CPU utilization. 
+
+How is it possible for the wait time per operation to go up faster (or higher) than the completion time per operation?
+It is possible for the wait time per operation to go higher than the completion time per operation because multiple threads can be waiting at the same time and we are counting that value per thread. This means that the wait times could be a lot higher because if 20 threads are waiting for the same second that would be 20s of wait time but only 1s of completion time. 
+
+QUESTION 2.3.4 - Performance of Partitioned Lists
+Explain the change in performance of the synchronized methods as a function of the number of lists.
+As we increase the number of lists, we increase performance of the synchronized methods. With more lists we can have more threads operating on the shared datastructure at once! This means higher throughput. This is possible since we are locking each section individually. This helps us get the most out of each thread.
+
+Should the throughput continue increasing as the number of lists is further increased? If not, explain why not.
+The throughput will continue to increase until a point. If we for instance have a list size that is greater than the actual size of the list it will not help at all. This means we have a list of 100 elements but are trying to subdivide it into 10000 sublists. This gives us no gain, and perhaps adds more overhead!
+
+It seems reasonable to suggest the throughput of an N-way partitioned list should be equivalent to the throughput of a single list with fewer (1/N) threads. Does this appear to be true in the above curves? If not, explain why not.
+The curves do not support this hypothesis. The throughput of an N-way partitioned list is greater than that of a single list with 1/N threads. This is likely because the size of the list is smaller so the list operations are less expensive. For instance the single list would have an N times as expensive function than the one broken up into N sublists. 

@@ -1,0 +1,4 @@
+real 1.00
+user 0.00
+sys 0.00
+Hello world! CS 111! Knowledge crowns those who seek her.

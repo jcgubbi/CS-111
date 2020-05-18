@@ -1,0 +1,2 @@
+exit 0 cat 
+exit 0 wc -c 

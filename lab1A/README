@@ -1,0 +1,17 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+
+LAB 1A:
+
+There are not any known limitations to my code as of now. The only possible problems would come from test
+cases that are outside the realm of the test script. I only tested my code using similar test cases
+as the test script itself. 
+
+Contents:
+
+README - This file, with information about limitations. 
+
+lab1a.c - My C source code which compiles to simpsh.
+
+Makefile - Make file that compiles code, tests and can zip it.

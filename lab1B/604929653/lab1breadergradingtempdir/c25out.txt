@@ -1,0 +1,7 @@
+--command 0 0 0 ./grading_helper 31 e f g h 
+--command 0 0 0 ./grading_helper 9 i j k l 
+--wait
+signal 11 ./grading_helper 11 a b c d 
+signal 31 ./grading_helper 31 e f g h 
+signal 9 ./grading_helper 9 i j k l 
+--command 0 0 0 bash -c exit 50 
