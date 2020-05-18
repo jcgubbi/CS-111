@@ -1,0 +1,35 @@
+NAME: Jivan Gubbi
+UID: 604929653
+EMAIL: jivangubbi@gmail.com
+
+Included Files: 
+
+lab0.c - A C file that can be compiled to make the desired executable(using the Makefile). It passes all
+smoke checks and runs without any issues. It copies stdin to stdout by default but you can specify
+input and output files using the --input and --output flags. There are also flags to cause a segfault,
+catch a segfault, and dumpcore. 
+
+Makefile - A make file with various options to make the lab0 executable. The default creates lab0 without
+any testing. Make checks creates the executable and files that are used for testing. It shows which test
+cases pass and which fail. Make clean deletes the executable and all files created by make. Make dist 
+creates a tarball that includes all of the relevant files.
+
+breakpoint.png - A screenshot where gdb is run with a breakpoint on the line where I cause a Segfault. 
+This clearly shows that a = 0x0 which is a nullptr and that we are trying to set it to 0.
+
+backtrace.png - A screenshot with a backtrace of the segmentation fault and all of the variables that I had
+used at the time. This shows that there is a variable "a" which is a nullptr and we try to use it later.
+
+README - This file with information about the project.
+
+
+Smoke Testing:
+
+input - checks that when a faulty input file is used it exits correctly. 
+output - checks that when a faulty output file(without write privedges) is used it exits correctly.
+inout - checks that if valid input and output files are used it copies from in to out. 
+segfault - checks that if segfault option is passed it correctly segfaults. 
+catch - checks that if segfault and catch are sent then it handles it with SIGSEV.
+dumpcore - checks that if segfault, catch and dumpcore are sent it still segfaults. 
+argfail - checks that if a random argument is passed it exits correctly. 
+basic - checks that without in or out it works. Just handles stdin to stdout.
